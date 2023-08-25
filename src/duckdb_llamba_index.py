@@ -44,4 +44,5 @@ def get_answer(query):
 
 
 result = get_answer("What is total contract value in year 2024?")
+
 print(result)
