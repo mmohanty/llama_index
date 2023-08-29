@@ -38,11 +38,15 @@ sql_database = SQLDatabase(engine, include_tables=["contract_stats"])
 
 query_engine = NLSQLTableQueryEngine(sql_database)
 
+format_hint: str = "Please answer with a short summary. Dont explain the query and make it compatible with DuckDB"
 
 def get_answer(query):
-    return query_engine.query(query)
+    final_query = query + "\n" + format_hint
+    return query_engine.query(final_query)
 
 
 result = get_answer("What is total contract value in year 2024?")
 
 print(result)
+
+print(result.metadata)
