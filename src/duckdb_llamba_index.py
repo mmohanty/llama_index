@@ -38,9 +38,15 @@ with engine.connect() as connection:
 
 from llama_index import SQLDatabase
 
+
 sql_database = SQLDatabase(engine, include_tables=["contract_stats"])
 
-query_engine = NLSQLTableQueryEngine(sql_database)
+#llm = OpenAI(temperature=0.5, model="gpt-3.5-turbo-16k")
+#service_context = ServiceContext.from_defaults(llm=llm)
+
+# query_engine = NLSQLTableQueryEngine(sql_database, service_context=service_context) with OpenAI llm
+
+query_engine = NLSQLTableQueryEngine(sql_database) # default llm
 
 format_hint: str = "Please answer with a short summary. Dont explain the query and make it compatible with DuckDB"
 
