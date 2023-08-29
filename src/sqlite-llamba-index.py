@@ -63,10 +63,15 @@ sql_database = SQLDatabase(engine, include_tables=["contract"])
 
 query_engine = NLSQLTableQueryEngine(sql_database)
 
+format_hint: str = "Please answer with a short summary. Dont explain the query and make it compatible with SQLite"
+
 #response = query_engine.query("What is total contract value of Wipro?")
 #response = query_engine.query("How many contracts are going to be renewed next month?")
 #response = query_engine.query("Which contracts are going to be renewed next month?")
-response = query_engine.query("What is total contract value in year 2023?")
+
+query = "What is total contract value in year 2023?"
+final_query = query + "\n" + format_hint
+response = query_engine.query(final_query)
 
 print(response)
 
